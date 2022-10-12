@@ -24,7 +24,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     ethtool \
     file\
     fping \
+    gzip \
     iftop \
+    iotop \
     iperf \
     iperf3 \
     iproute2 \
@@ -37,6 +39,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     libc6-compat \
     liboping \
     mtr \
+    nc \
     net-snmp-tools \
     netcat-openbsd \
     nftables \
@@ -44,6 +47,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     nmap \
     nmap-nping \
     nmap-scripts \
+    nss_wrapper \
     openssl \
     py3-pip \
     py3-setuptools \
@@ -73,6 +77,14 @@ RUN mv /tmp/ctop /usr/local/bin/ctop
 RUN mv /tmp/calicoctl /usr/local/bin/calicoctl
 RUN mv /tmp/termshark /usr/local/bin/termshark
 
+# OpenAF packages
+RUN /openaf/opack install oJob-common\
+  && /openaf/opack install S3\
+  && /openaf/opack install Kube\
+  && /openaf/opack install ElasticSearch\
+  && /openaf/opack install AWS\
+  && /openaf/ojob ojob.io/s3/getMC path=/usr/bin
+
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -83,7 +95,7 @@ COPY motd motd
 RUN chmod -R g=u /root
 RUN chown root:root /usr/bin/dumpcap
 
-# ---
+# -------------------
 FROM scratch as final
 
 COPY --from=main / /
