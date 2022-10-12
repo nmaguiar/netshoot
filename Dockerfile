@@ -22,7 +22,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     dhcping \
     drill \
     ethtool \
-    file\
+    file \
     fping \
     gzip \
     iftop \
@@ -39,7 +39,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     libc6-compat \
     liboping \
     mtr \
-    nc \
+    netcat-openbsd \
     net-snmp-tools \
     netcat-openbsd \
     nftables \
