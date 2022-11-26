@@ -25,6 +25,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     file \
     fping \
     gzip \
+    gcc \
     iftop \
     iotop \
     iperf \
