@@ -69,9 +69,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     websocat \
     swaks \
     perl-crypt-ssleay \
-    perl-net-ssleay
-
-RUN pip3 install --upgrade httpie
+    perl-net-ssleay\
+    httpie
 
 RUN /bin/sh /tmp/fetch_binaries.sh
 RUN rm /tmp/fetch_binaries.sh
